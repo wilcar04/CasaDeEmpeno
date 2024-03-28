@@ -5,13 +5,13 @@ public class LoanRequest {
     public int id;
     public Date date;
     public Item item;
+    public Client client;
 
-    LoanRequest(Date date){
+    LoanRequest(Date date,Client client, Item item){
         this.date = date;
         // TO DO.
         nextId++;
         this.id = nextId;
-        this.item = new Item("", "");
-
+        this.item = item;
     }
 }

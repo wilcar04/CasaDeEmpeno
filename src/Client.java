@@ -1,6 +1,6 @@
 public class Client {
-    public String name;
     private static int nextId = 0;
+    public String name;
     public int id;
     public String email;
     public String telephone;
@@ -10,6 +10,5 @@ public class Client {
         this.telephone = telephone;
         nextId ++;
         this.id = nextId;
-
     }
 }
