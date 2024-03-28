@@ -6,12 +6,14 @@ public class LoanRequest {
     public Date date;
     public Item item;
     public Client client;
+    public int price;
 
-    LoanRequest(Date date,Client client, Item item){
+    LoanRequest(Date date, Client client, Item item, int price){
         this.date = date;
-        // TO DO.
         nextId++;
         this.id = nextId;
+        this.client = client;
         this.item = item;
+        this.price = price;
     }
 }

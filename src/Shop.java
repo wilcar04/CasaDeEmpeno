@@ -40,23 +40,17 @@ public class Shop {
 
         //RETURN LIST
     }
-    public void rejectLoanRequest(int idloanRequest){
-        //HU3
-        //Yo como tienda quiero ver las prendas empeñadas
-        // con detalles para saber cuanto queda hasta que
-        // expire el contrato.
+    public void rejectLoanRequest(int idLoanRequest){
+        this.loansRequest.changeToRejectedState(idLoanRequest);
     }
-    public void counterofferLoanRequest(int price, int idloanRequest){
-        //HU4
-        //Yo como tienda quiero contraofertar
-        // por una prenda ofreciendo un precio
-        // diferente al del cliente.
+    public void counterofferLoanRequest(int price, int idLoanRequest){
+        this.loansRequest.changeToCounterofferState(price, idLoanRequest);
 
     }
-    public void acceptLoanRequest(int idloanRequest){
-        //HU5
-        //Yo como tienda quiero aceptar una oferta.
+    public void acceptLoanRequest(int idLoanRequest){
+        this.loansRequest.changeToAcceptedState(idLoanRequest);
     }
+
     public void getMyItemsInteractions(){
         //HU6
         //Yo como tienda quiero obtener la lista
