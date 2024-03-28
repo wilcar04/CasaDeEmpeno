@@ -91,11 +91,11 @@ public class Shop {
         return items;
     }
 
-    public void moveItemFromExpiredContractToStorage(){
-        List<Item> ContractsWithDeadlineDate = getItemsOfListContracts(this.getContractsWithDeadlineDate())
+    public void moveItemsOfExpiredContractsToStorage(){
+        List<Item>  itemsOfExpiredContracts= getItemsOfListContracts(this.getContractsWithDeadlineDate())
                 .stream()
                 .toList();
-        this.storage.addListItems(ContractsWithDeadlineDate);
+        this.storage.addListItems(itemsOfExpiredContracts);
         this.deleteExpiredContracts();
     }
 
