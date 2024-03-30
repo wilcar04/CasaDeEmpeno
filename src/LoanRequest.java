@@ -42,5 +42,10 @@ public class LoanRequest {
                 System.out.println("Invalid state");
         }
 
+
+    }
+
+    public String getState(){
+        return this.state;
     }
 }
