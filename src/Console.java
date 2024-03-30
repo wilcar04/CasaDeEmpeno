@@ -1,3 +1,5 @@
+import java.sql.SQLOutput;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,24 +43,21 @@ public class Console {
         scan.nextLine();
     }
 
-    public static void manageLoanRequest(){
-
+    public static void showListInfo(List<String> listInfo){
+        for(String info : listInfo) {
+            System.out.println(info);
+        }
     }
-    public static void checkStateOfItemsPawned(){
 
-    }
-    public static boolean validarPlaca(String placa) {
-        String patron = "^[A-Za-z]{3}\\d{3}$";
-
-        //
-        // Compilar la expresión regular en un objeto Pattern
-        Pattern pattern = Pattern.compile(patron);
-
-        // Crear un objeto Matcher para hacer coincidir la placa con el patrón
-        Matcher matcher = pattern.matcher(placa);
-
-        // Comprobar si la placa coincide con el patrón
-        return matcher.matches();
+    public static String getId(){
+        do {
+            System.out.println("Digita el id del objeto a gestionar: ");
+            String id = scan.nextLine();
+            if (isNumeric(id)){
+                return id;
+            }
+            System.out.println("Opción inválida, intente de nuevo");
+        } while(true);
     }
 
     public static boolean isNumeric(String str) {
@@ -68,6 +67,12 @@ public class Console {
         } catch(NumberFormatException e){
             return false;
         }
+    }
+
+    // Entries: Lo que se muestra al seleccionar la opción
+    public static void entryManageLoanRequest(){
+        System.out.println("\n------- Gestionar solicitudes de prestamo -------");
+        System.out.println("Estas son las solicitudes de préstamo sin atender: ");
     }
 }
 

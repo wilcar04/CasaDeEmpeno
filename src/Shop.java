@@ -11,7 +11,6 @@ public class Shop {
     public String name;
     private Storage storage;
     private List<Contract> contracts;
-
     private ManagerLoanRequest loansRequest;
 
     Shop (Integer NIT, String name){
@@ -28,8 +27,8 @@ public class Shop {
     public List<String> getNewLoanRequest() {
         return this.loansRequest.getNewLoanRequest().stream().map(LoanRequest::toString).toList();
     }
-    public List<String> getCurrentContactsInfo(){
-        return this.
+    public void getCurrentContactsInfo(){
+
     }
     public void rejectLoanRequest(int idLoanRequest){
         this.loansRequest.changeToRejectedState(idLoanRequest);
