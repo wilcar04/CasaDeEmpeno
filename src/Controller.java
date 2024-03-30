@@ -1,5 +1,9 @@
+import java.util.List;
+
 public class Controller {
+    private static Shop shop;
     public static void mainLoop(){
+        shop.loadInitialData();
         while(true){
             try{
                 optionsSwitcher();
@@ -46,6 +50,14 @@ public class Controller {
     }
 
     public static void manageLoanRequest(){
+        Console.entryManageLoanRequest();
+        List<String> newLoanRequestInfo = shop.getNewLoanRequest();
+        Console.showListInfo(newLoanRequestInfo);
+        do {
+            String id = Console.getId();
+
+            Console.invalidOption();
+        }while(true);
 
     }
 
