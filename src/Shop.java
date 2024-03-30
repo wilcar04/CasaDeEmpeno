@@ -10,7 +10,7 @@ public class Shop {
     public Integer NIT;
     public String name;
     private Storage storage;
-    private List<Contract> contracts;
+    private ManagerContract managerContracts;
 
     private ManagerLoanRequest loansRequest;
 
@@ -18,7 +18,8 @@ public class Shop {
         this.NIT = NIT;
         this.name = name;
         this.storage= new Storage("Store");
-        this.contracts = new ArrayList<Contract>();
+
+        this.managerContracts = new ManagerContract();
         this.loansRequest = new ManagerLoanRequest();
 
     }
@@ -29,7 +30,7 @@ public class Shop {
         return this.loansRequest.getNewLoanRequest().stream().map(LoanRequest::toString).toList();
     }
     public List<String> getCurrentContactsInfo(){
-        return this.
+
     }
     public void rejectLoanRequest(int idLoanRequest){
         this.loansRequest.changeToRejectedState(idLoanRequest);
