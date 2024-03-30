@@ -22,6 +22,9 @@ public class Shop {
         this.loansRequest = new ManagerLoanRequest();
 
     }
+    public void loadInitialData(){
+
+    }
     public List<String> getNewLoanRequest() {
         return this.loansRequest.getNewLoanRequest().stream().map(LoanRequest::toString).toList();
     }

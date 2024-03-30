@@ -19,9 +19,24 @@ public class Controller {
                     manageLoanRequest();
                 }
                 case "2" -> {
-                    checkStateOfItemsPawned();
+                    readLoanRequestManagementHistory();
                 }
                 case "3" -> {
+                    readCurrentContractState();
+                }
+                case "4" -> {
+                    readExpiredContracts();
+                }
+                case "5" -> {
+                    readContractsAboutToExpire();
+                }
+                case "6" -> {
+                    manageContracts();
+                }
+                case "7" -> {
+                    readItemsOwnedByShop();
+                }
+                case "8" -> {
                     exit();
                 }
                 default -> {Console.invalidOption(); continue;}
@@ -34,9 +49,30 @@ public class Controller {
 
     }
 
-    public static void checkStateOfItemsPawned(){
+    public static void readLoanRequestManagementHistory(){
 
     }
+
+    public static void readCurrentContractState(){
+
+    }
+
+    public static void readExpiredContracts(){
+
+    }
+
+    public static void readContractsAboutToExpire(){
+
+    }
+
+    public static void manageContracts(){
+
+    }
+
+    public static void readItemsOwnedByShop(){
+
+    }
+
     public static void exit() throws Exception {
         Console.farewell();
         throw new Exception();
