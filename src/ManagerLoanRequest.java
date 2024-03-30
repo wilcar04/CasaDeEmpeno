@@ -4,11 +4,10 @@ import java.util.stream.Collectors;
 
 
 public class ManagerLoanRequest {
-    public List<LoanRequest> AcceptedLoanRequest;
-    public List<LoanRequest> RejectedLoanRequest;
-    public List<LoanRequest> CounterofferLoanRequest;
-    public List<LoanRequest> NewLoanRequest;
-
+    private List<LoanRequest> AcceptedLoanRequest;
+    private List<LoanRequest> RejectedLoanRequest;
+    private List<LoanRequest> CounterofferLoanRequest;
+    private List<LoanRequest> NewLoanRequest;
 
 
     ManagerLoanRequest(){
@@ -17,6 +16,19 @@ public class ManagerLoanRequest {
         this.CounterofferLoanRequest = new ArrayList<LoanRequest>();
         this.NewLoanRequest= new ArrayList<LoanRequest>();
     }
+    public List<LoanRequest> getNewLoanRequest(){
+        return this.NewLoanRequest;
+    }
+    public List<LoanRequest> getRejectedLoanRequest(){
+        return this.RejectedLoanRequest;
+    }
+    public List<LoanRequest> getAcceptedLoanRequest(){
+        return this.AcceptedLoanRequest;
+    }
+    public List<LoanRequest> getCounterofferLoanRequest(){
+        return this.CounterofferLoanRequest;
+    }
+
     public void findItem(){
 
     }
@@ -33,8 +45,6 @@ public class ManagerLoanRequest {
         this.NewLoanRequest = this.NewLoanRequest.stream()
                 .filter(newLoanRequest -> idloanRequest != newLoanRequest.id)
                 .collect(Collectors.toList());
-
-
     }
 
     public void changeToRejectedState(int idloanRequest){

@@ -2,12 +2,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    public List<Item> expiredItems;
+    private List<Item> items;
     Storage(String store){
-        this.expiredItems = new ArrayList<Item>();
+        this.items = new ArrayList<Item>();
 
     }
+    public List<Item> getItems(){
+        return this.items;
+    }
     public void addListItems(List<Item> items){
-        this.expiredItems.addAll(items);
+        this.items.addAll(items);
     }
 }

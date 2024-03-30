@@ -3,13 +3,15 @@ public class Item {
     public  int id;
     public String name;
     public String description;
-    public Category category;
 
     Item(String name, String description){
         this.name = name;
         this.description = description;
-        this.category = new Category("");
         nextId ++;
         this.id = nextId;
+    }
+    @Override
+    public String toString(){
+        return "Id: " + this.id + " | " + this.name + "\nDescripción: " + this.description;
     }
 }

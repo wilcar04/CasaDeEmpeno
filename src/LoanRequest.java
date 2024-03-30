@@ -16,4 +16,10 @@ public class LoanRequest {
         this.item = item;
         this.price = price;
     }
+    @Override
+    public String toString(){
+        return "Id: " + Integer.toString(this.id) + " | Fecha: " + this.date + "\nItem: " + this.item.name +
+                "\nDescripción: " + this.item.description + "\nSolicitado por: " + this.client.name + " | Email: "
+                + this.client.email + "\nValor propuesto: " + this.price;
+    }
 }

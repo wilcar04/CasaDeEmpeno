@@ -3,6 +3,7 @@ import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 
 public class Shop {
@@ -21,24 +22,11 @@ public class Shop {
         this.loansRequest = new ManagerLoanRequest();
 
     }
-    public void getNewLoanRequest(){
-
-        //HU1
-        // Yo como tienda quiero obtener la lista
-        // de ofertas de prendas para evaluar
-        // cada una.
-
-        //RETURN LIST
-
+    public List<String> getNewLoanRequest() {
+        return this.loansRequest.getNewLoanRequest().stream().map(LoanRequest::toString).toList();
     }
-    public void getPawnedItems(){
-        // HU2
-        // Yo como tienda quiero ver las prendas empeñadas con detalles
-        // para saber cuanto queda hasta que expire el contrato.
-
-
-
-        //RETURN LIST
+    public List<String> getCurrentContactsInfo(){
+        return this.
     }
     public void rejectLoanRequest(int idLoanRequest){
         this.loansRequest.changeToRejectedState(idLoanRequest);
@@ -51,27 +39,24 @@ public class Shop {
         this.loansRequest.changeToAcceptedState(idLoanRequest);
     }
 
-    public void getMyItemsInteractions(){
-        //HU6
-        //Yo como tienda quiero obtener la lista
-        // de las prendas que he atendido para observar
-        // su estado.
-
+    public List<String> getStateOfLoanRequestInteractions(){
+        Stream<String> aceepted_interactions = this.loansRequest.getAcceptedLoanRequest().stream()
+                .map(loanRequest -> "== Aceptada ==\n" + loanRequest.toString());
+        Stream<String> rejected_interactions = this.loansRequest.getRejectedLoanRequest().stream()
+                .map(loanRequest -> "== Rechazada ==\n" + loanRequest.toString());
+        Stream<String> counteroffer_interactions = this.loansRequest.getCounterofferLoanRequest().stream()
+                .map(loanRequest -> "== Contraofertada ==\n" + loanRequest.toString());
+        return Stream.concat(aceepted_interactions, Stream.concat(rejected_interactions, counteroffer_interactions)).toList();
     }
 
-    public List<Contract> getContractsWithDeadlineDate()
-    {
+    public List<Contract> getContractsWithDeadlineDate() {
         List<Contract> ContractsWithDeadlineDate =  this.contracts.stream()
             .filter(contract -> contract.checkDeadLine())
             .toList();
         return ContractsWithDeadlineDate;
-
     }
 
-
     public List<Contract> getItemsWithDeadlineDateInOneWeek(){
-
-
         List<Contract> ContractsWithDeadlineDateInOneWeek =  this.contracts.stream()
                 .filter(contract -> contract.checkDeadLineInOneWeek())
                 .toList();
@@ -80,7 +65,7 @@ public class Shop {
     }
     public  List<Item> getItemsOfListContracts(List<Contract> contracts){
         List<Item> items = contracts.stream()
-                .map(contract -> contract.loanRequest.item)
+                .map(contract -> contract.item)
                 .toList();
         return items;
     }
@@ -99,5 +84,11 @@ public class Shop {
                 .toList();
     }
 
+    public List<String> getItemsOwned(){
+        return this.storage.getItems().stream().map(Item::toString).toList();
+    }
 
+    public void setContractAsPaid(){
+
+    }
 }

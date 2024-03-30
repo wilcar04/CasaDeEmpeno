@@ -8,17 +8,25 @@ public class Contract {
     public Date initial_format;
     public Date deadline;
     public Float valor;
-    public LoanRequest loanRequest;
+    public Item item;
     public Client client;
 
-    Contract(Float interest, Date initial_format, Date deadline, Float valor, LoanRequest loanRequest,Client client){
+    Contract(Float interest, Date initial_format, Date deadline, Float valor, Item item,Client client){
         nextId++;
         this.id = nextId;
         this.interest = interest;
         this.initial_format = initial_format;
         this.deadline = deadline;
         this.valor = valor;
-        this.loanRequest = loanRequest;
+        this.item = item;
+        this.client = client;
+    }
+
+    @Override
+    public String toString(){
+        return "Id: " + this.id + " | Item: " + this.item.name + "\nFecha límite de pago: " + this.deadline
+                + "\nValor: " + this.valor + " con " + this.interest + "% de intereses\nDeudor: " + this.client.name
+                + "\nFecha del prestamo: " + this.initial_format;
     }
 
     public boolean checkDeadLine(){
