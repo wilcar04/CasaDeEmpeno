@@ -22,11 +22,11 @@ public class Shop {
     public void loadInitialData(){
 
     }
-    public void getNewLoanRequest() {
-
+    public List<String> getNewLoanRequest() {
+        return this.loansRequest.getNewState().stream().map(LoanRequest::toString).toList();
     }
-    public void getCurrentContactsInfo(){
-
+    public List<String> getCurrentContractsInfo(){
+        return this.managerContracts.getCurrentContracts().stream().map(Contract::toString).toList();
     }
     public void rejectLoanRequest(int idLoanRequest){
         this.loansRequest.changeToRejectedState(idLoanRequest);
@@ -37,6 +37,7 @@ public class Shop {
     }
     public void acceptLoanRequest(int idLoanRequest){
         this.loansRequest.changeToAcceptedState(idLoanRequest);
+        // TO DO: Crear contrato
     }
 
     public void getStateOfLoanRequestInteractions(){
@@ -63,7 +64,17 @@ public class Shop {
         return this.storage.getItems().stream().map(Item::toString).toList();
     }
 
-    public void setContractAsPaid(){
-
+    public void setContractAsPaid(int id){
+        // TO DO: Hacer en ManagerContract un método para cambiar a cada estado (cambiar a pagado, vencido)
+        // TO DO: Testear que en ningún momento un contrato pagado caiga a la categoría vencido por la fecha limite
     }
+
+    public boolean existsLoanRequest(String id){
+        return this.loansRequest.existsLoanRequest(Integer.parseInt(id));
+    }
+
+    public boolean existsContract(String id){
+        return this.managerContracts.existContract(Integer.parseInt(id));
+    }
+
 }

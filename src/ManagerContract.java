@@ -60,8 +60,9 @@ public class ManagerContract {
     public void changeStatus(int id, String status){
         Contract findContract = this.findContract(id);
         findContract.setState(status);
-
     }
+
+
 
 
     public List<Contract> getItemsWithDeadlineDateInOneWeek(){

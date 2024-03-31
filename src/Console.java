@@ -19,7 +19,7 @@ public class Console {
         System.out.println("3. Consultar estado de contrado de las prendas empeñadas."); // Todos los contratos
         System.out.println("4. Consultar contratos vencidos.");
         System.out.println("5. Consultar contratos a vencer en una semana.");
-        System.out.println("6. Gestionar contratos."); // Desde aquí se marcan como pagos o se mueven a storage
+        System.out.println("6. Registrar pago de contrato.");
         System.out.println("7. Consultar prendas adquiridas por la tienda.");
         System.out.println("8. Salir.");
         System.out.println("-----------------------------------------------------");
@@ -43,6 +43,10 @@ public class Console {
         scan.nextLine();
     }
 
+    public static void succes(){
+        System.out.println("Se ha realizado la operación con éxito");
+    }
+
     public static void showListInfo(List<String> listInfo){
         for(String info : listInfo) {
             System.out.println(info);
@@ -50,11 +54,21 @@ public class Console {
     }
 
     public static String getId(){
+        System.out.println("Digita el id del objeto a gestionar: ");
+        return getNumber();
+    }
+
+    public static String getPrice(){
+        System.out.println("Digita el nuevo precio que le propone al solicitante: ");
+        return getNumber();
+    }
+
+    public static String getNumber(){
+        String input;
         do {
-            System.out.println("Digita el id del objeto a gestionar: ");
-            String id = scan.nextLine();
-            if (isNumeric(id)){
-                return id;
+            input = scan.nextLine();
+            if (isNumeric(input)){
+                return input;
             }
             System.out.println("Opción inválida, intente de nuevo");
         } while(true);
@@ -70,9 +84,25 @@ public class Console {
     }
 
     // Entries: Lo que se muestra al seleccionar la opción
+    // Option 1
     public static void entryManageLoanRequest(){
         System.out.println("\n------- Gestionar solicitudes de prestamo -------");
         System.out.println("Estas son las solicitudes de préstamo sin atender: ");
+    }
+
+    // Option 1
+    public static String optionsToManageLoanRequest(){
+        System.out.println("-----\n¿Qué deseas hacer con esta solicitud?\n");
+        System.out.println("1. Aceptarla");
+        System.out.println("2. Rechazarla");
+        System.out.println("3. Contraofertarla");
+        return scan.nextLine();
+    }
+
+    // Option 6
+    public static void entryPayContract(){
+        System.out.println("\n------- Registrar pago de contrato -------");
+        System.out.println("Estos son todos los contratos de prenda vigentes: ");
     }
 }
 
