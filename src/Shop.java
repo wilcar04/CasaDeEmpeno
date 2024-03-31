@@ -6,25 +6,24 @@ public class Shop {
     public Integer NIT;
     public String name;
     private Storage storage;
-    private List<Contract> contracts;
 
     private ManagerLoanRequest loansRequest;
-    private ManagerContract managerContract;
+    private ManagerContract managerContracts;
 
     Shop (Integer NIT, String name){
         this.NIT = NIT;
         this.name = name;
         this.storage= new Storage("Store");
 
-        this.managerContract = new ManagerContract();
+        this.managerContracts = new ManagerContract();
         this.loansRequest = new ManagerLoanRequest();
 
     }
     public void loadInitialData(){
 
     }
-    public List<String> getNewLoanRequest() {
-        return this.loansRequest.getNewLoanRequest().stream().map(LoanRequest::toString).toList();
+    public void getNewLoanRequest() {
+
     }
     public void getCurrentContactsInfo(){
 
@@ -40,14 +39,8 @@ public class Shop {
         this.loansRequest.changeToAcceptedState(idLoanRequest);
     }
 
-    public List<String> getStateOfLoanRequestInteractions(){
-        Stream<String> aceepted_interactions = this.loansRequest.getAcceptedLoanRequest().stream()
-                .map(loanRequest -> "== Aceptada ==\n" + loanRequest.toString());
-        Stream<String> rejected_interactions = this.loansRequest.getRejectedLoanRequest().stream()
-                .map(loanRequest -> "== Rechazada ==\n" + loanRequest.toString());
-        Stream<String> counteroffer_interactions = this.loansRequest.getCounterofferLoanRequest().stream()
-                .map(loanRequest -> "== Contraofertada ==\n" + loanRequest.toString());
-        return Stream.concat(aceepted_interactions, Stream.concat(rejected_interactions, counteroffer_interactions)).toList();
+    public void getStateOfLoanRequestInteractions(){
+
     }
 
     public List<Contract> getContractsWithDeadlineDate() {
