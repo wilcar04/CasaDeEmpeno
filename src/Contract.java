@@ -1,5 +1,6 @@
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class Contract {
     private static int nextId = 0;
@@ -33,7 +34,10 @@ public class Contract {
 
 
     public boolean checkDeadLine(){
-       return this.deadline.before(new Date());
+        if(this.deadline.before(new Date())){
+            this.state = "expired";
+        }
+        return Objects.equals(this.state, "expired");
     }
     public boolean checkDeadLineInOneWeek(){
         Calendar calendar = Calendar.getInstance();

@@ -1,7 +1,3 @@
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -30,7 +26,6 @@ public class Shop {
     public List<String> getNewLoanRequest() {
         return this.loansRequest.getNewLoanRequest().stream().map(LoanRequest::toString).toList();
     }
-
     public void getCurrentContactsInfo(){
 
     }
@@ -56,40 +51,21 @@ public class Shop {
     }
 
     public List<Contract> getContractsWithDeadlineDate() {
-        List<Contract> ContractsWithDeadlineDate =  this.contracts.stream()
-            .filter(contract -> contract.checkDeadLine())
-            .toList();
-        return ContractsWithDeadlineDate;
+        return this.managerContracts.getExpiredContracts();
     }
 
     public List<Contract> getItemsWithDeadlineDateInOneWeek(){
-        List<Contract> ContractsWithDeadlineDateInOneWeek =  this.contracts.stream()
-                .filter(contract -> contract.checkDeadLineInOneWeek())
-                .toList();
-
-        return ContractsWithDeadlineDateInOneWeek;
+        return this.managerContracts.getItemsWithDeadlineDateInOneWeek();
     }
     public  List<Item> getItemsOfListContracts(List<Contract> contracts){
-        List<Item> items = contracts.stream()
-                .map(contract -> contract.item)
-                .toList();
-        return items;
+        return this.managerContracts.getItemsOfListContracts(contracts);
     }
 
     public void moveItemsOfExpiredContractsToStorage(){
-        List<Item>  itemsOfExpiredContracts= getItemsOfListContracts(this.getContractsWithDeadlineDate())
-                .stream()
-                .toList();
+        List<Item> itemsOfExpiredContracts= this.managerContracts.getItemsOfExpiredContracts();
         this.storage.addListItems(itemsOfExpiredContracts);
-        this.deleteExpiredContracts();
+        this.managerContracts.deleteExpiredContracts();
     }
-
-    public void deleteExpiredContracts(){
-        this.contracts = this.contracts.stream()
-                .filter(contract -> !contract.checkDeadLine())
-                .toList();
-    }
-
     public List<String> getItemsOwned(){
         return this.storage.getItems().stream().map(Item::toString).toList();
     }
