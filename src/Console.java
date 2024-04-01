@@ -31,16 +31,16 @@ public class Console {
     }
 
     public static void invalidOption(){
-        System.out.println("Por favor, elija una opción válida.");
+        System.out.println("Por favor, elija una opción válida.\n");
     }
 
     public static void pause(){
-        System.out.println("Presione enter para continuar.");
+        System.out.println("\nPresione enter para continuar.");
         scan.nextLine();
     }
 
     public static void succes(){
-        System.out.println("Se ha realizado la operación con éxito");
+        System.out.println("\nSe ha realizado la operación con éxito");
     }
 
     public static void showListInfo(List<String> listInfo){
@@ -93,6 +93,11 @@ public class Console {
         System.out.println("2. Rechazarla");
         System.out.println("3. Contraofertarla");
         return scan.nextLine();
+    }
+
+    // Option 1
+    public static String newContract(){
+        System.out.println("Se ha creado un nuevo contrato con el item de la solicitud");
     }
 
     // Option 2

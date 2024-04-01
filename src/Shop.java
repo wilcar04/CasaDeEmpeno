@@ -61,6 +61,7 @@ public class Shop {
     }
 
     public void moveItemsOfExpiredContractsToStorage(){
+        // TO DO: Definir desde donde se va a llamar este método
         List<Item> itemsOfExpiredContracts= this.managerContracts.getItemsOfExpiredContracts();
         this.storage.addListItems(itemsOfExpiredContracts);
         this.managerContracts.deleteExpiredContracts();

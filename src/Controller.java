@@ -81,6 +81,7 @@ public class Controller {
             switch (action){
                 case "1" -> {
                     shop.acceptLoanRequest(id);
+                    Console.newContract();
                 }
                 case "2" -> {
                     shop.rejectLoanRequest(id);
