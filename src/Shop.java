@@ -1,8 +1,10 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
 
 public class Shop {
+    DataContainer data;
     public Integer NIT;
     public String name;
     private Storage storage;
@@ -16,8 +18,13 @@ public class Shop {
         this.storage= new Storage("Store");
         this.managerContracts = new ManagerContract();
         this.loansRequest = new ManagerLoanRequest();
+        this.data = new DataContainer();
     }
     public void loadInitialData(){
+        this.storage = this.data.storageData();
+        this.managerContracts = this.data.contractsData();
+        this.loansRequest = this.data.loansRequestData();
+
         // TO DO: super importante!!!! crear diferentes contratos, items, clientes y loanRequest con diferentes atributos, fechas y estados
         // con el fin de poder testear todas las HU y opciones de consola y para que el profe pueda ver funcionando todas las operaciones
     }
