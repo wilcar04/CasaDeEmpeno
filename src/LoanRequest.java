@@ -6,7 +6,12 @@ public class LoanRequest {
     public Date date;
     public Item item;
     public Client client;
-    public int price;
+
+    public float getPrice() {
+        return price;
+    }
+
+    public float price;
     private String state;
 
     LoanRequest(Date date, Client client, Item item, int price){
@@ -45,7 +50,17 @@ public class LoanRequest {
 
     }
 
+    public static int getNextId() {
+        return nextId;
+    }
+
+    public static void setNextId(int nextId) {
+        LoanRequest.nextId = nextId;
+    }
+
     public String getState(){
         return this.state;
     }
+
+
 }

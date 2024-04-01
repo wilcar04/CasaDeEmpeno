@@ -3,6 +3,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.stream.Collectors.toList;
+
 public class ManagerContract {
     private List<Contract> contracts;
 
@@ -15,15 +17,16 @@ public class ManagerContract {
         return contracts;
     }
 
-    public void createContract(Float interest, Date initial_date, Date deadline, Float valor, Item item, Client client){
-        Contract contract = new Contract(interest,initial_date,deadline,valor, item, client);
+    public void createContract(Float interest, Date deadline, Float price, Item item, Client client) {
+        Contract contract = new Contract(interest, deadline, price, item, client);
         this.addNewContract(contract);
     }
-    public void addNewContract(Contract contract){
+
+    public void addNewContract(Contract contract) {
         this.contracts.add(contract);
     }
 
-    public Contract findContract(int id ){
+    public Contract findContract(int id) {
         return this.contracts
                 .stream()
                 .filter(contract -> contract.id == id)
@@ -31,81 +34,100 @@ public class ManagerContract {
                 .getFirst();
     }
 
-    public boolean existContract (int id){
+    public boolean existContract(int id) {
         return this.getContracts().stream().anyMatch(contract -> contract.id == id);
     }
 
-    public void updateContract(Contract contract){
+    public void updateContract(Contract contract) {
 
         this.contracts = this.contracts
                 .stream()
-                .map(contract1 ->{
-                    if (contract1.id == contract.id){
+                .map(contract1 -> {
+                    if (contract1.id == contract.id) {
                         return contract;
-                    }
-                    else{
+                    } else {
                         return contract1;
                     }
-                } ).toList();
+                }).toList();
     }
 
 
-    public void deleteContract(int id){
+    public void deleteContract(int id) {
         this.contracts = this.contracts
                 .stream()
                 .filter(contract -> contract.id != id)
                 .toList();
     }
 
-    public void changeStatus(int id, String status){
+    private  void changeStatus(int id, String status) {
         Contract findContract = this.findContract(id);
         findContract.setState(status);
     }
+    public void changePaid(int id){
+        this.changeStatus(id,"paid");
+    }
 
-
-
-
-    public List<Contract> getItemsWithDeadlineDateInOneWeek(){
+    public List<Contract> getItemsWithDeadlineDateInOneWeek() {
 
         return this.getContracts().stream()
                 .filter(Contract::checkDeadLineInOneWeek)
                 .toList();
     }
-    public  List<Item> getItemsOfListContracts(List<Contract> contracts){
+
+    public List<Item> getItemsOfListContracts(List<Contract> contracts) {
         return this.getContracts().stream()
                 .map(contract -> contract.item)
                 .toList();
     }
 
-    public void deleteExpiredContracts(){
+    public void deleteExpiredContracts() {
         this.contracts = this.contracts.stream()
-                .filter(contract -> contract.getState() != "expired" )
+                .filter(contract -> !Objects.equals(contract.getState(), "expired"))
                 .toList();
     }
-    public List<Item> getItemsOfExpiredContracts(){
-        List<Contract> expiredContracts = this.getExpiredContracts();
-        return this.getItemsOfListContracts(expiredContracts);
 
 
-    }
+
     public List<Contract> getExpiredContracts() {
         return this.getContracts()
                 .stream()
-                .filter(Contract::checkDeadLine)
+                .filter(contract -> Objects.equals(contract.getState(), "expired"))
                 .toList();
     }
-    public List<Contract> getCurrentContracts(){
+
+
+    public List<Contract> getCurrentContracts() {
         return getContractsByState("current");
     }
-    public List<Contract> getPaidContracts(){
+
+    public List<Contract> getPaidContracts() {
         return getContractsByState("paid");
     }
-    private  List<Contract> getContractsByState(String state){
+
+    private List<Contract> getContractsByState(String state) {
         return this.contracts.stream()
                 .filter(contract -> Objects.equals(contract.getState(), state))
                 .toList();
     }
 
+    public void changeCurrentsContractsExpiredToExpired() {
+        this.contracts = this.contracts.stream()
+                .map(contract -> {
+                    if (contract.isExpired() && Objects.equals(contract.getState(), "current")) {
+                        contract.setState("expired");
+                    }
+                    return contract;
+                }).toList();
+    }
+
+    public List<Contract> CurrentsContractsExpired(){
+        return this.contracts.stream()
+                .filter(contract -> contract.isExpired() && Objects.equals(contract.getState(), "current")).toList();
+    }
+    }
 
 
-}
+
+
+
+

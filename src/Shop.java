@@ -1,10 +1,11 @@
-import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 
 public class Shop {
-    DataContainer data;
     public Integer NIT;
     public String name;
     private Storage storage;
@@ -18,13 +19,9 @@ public class Shop {
         this.storage= new Storage("Store");
         this.managerContracts = new ManagerContract();
         this.loansRequest = new ManagerLoanRequest();
-        this.data = new DataContainer();
     }
     public void loadInitialData(){
-        this.storage = this.data.storageData();
-        this.managerContracts = this.data.contractsData();
-        this.loansRequest = this.data.loansRequestData();
-
+        //VICTOOOOOOOR
         // TO DO: super importante!!!! crear diferentes contratos, items, clientes y loanRequest con diferentes atributos, fechas y estados
         // con el fin de poder testear todas las HU y opciones de consola y para que el profe pueda ver funcionando todas las operaciones
     }
@@ -41,9 +38,13 @@ public class Shop {
         this.loansRequest.changeToCounterofferState(price, idLoanRequest);
 
     }
-    public void acceptLoanRequest(int idLoanRequest){
+    public void acceptLoanRequest(int idLoanRequest,int quantityMonthsToAdd, float interest){
         this.loansRequest.changeToAcceptedState(idLoanRequest);
-        // TO DO: Crear contrato
+        Optional <LoanRequest> acceptedRequest =  this.loansRequest.getLoanRequest(idLoanRequest);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, quantityMonthsToAdd); // Agregar n meses a la fecha actual
+        Date oneDateFromNow = calendar.getTime();
+        acceptedRequest.ifPresent(loanRequest -> this.managerContracts.createContract(interest, oneDateFromNow, loanRequest.getPrice(), loanRequest.item, loanRequest.client));
     }
 
     public List<String> getStateOfLoanRequestInteractions(){
@@ -67,19 +68,15 @@ public class Shop {
         return this.managerContracts.getItemsOfListContracts(contracts);
     }
 
-    public void moveItemsOfExpiredContractsToStorage(){
-        // TO DO: Definir desde donde se va a llamar este método
-        List<Item> itemsOfExpiredContracts= this.managerContracts.getItemsOfExpiredContracts();
-        this.storage.addListItems(itemsOfExpiredContracts);
-        this.managerContracts.deleteExpiredContracts();
+    public void moveItemsToStorage(List<Item> items){
+        this.storage.addListItems(items);
     }
     public List<String> getItemsOwned(){
         return this.storage.getItems().stream().map(Item::toString).toList();
     }
 
     public void setContractAsPaid(int id){
-        // TO DO: Hacer en ManagerContract un método para cambiar a cada estado (cambiar a pagado, vencido)
-        // TO DO: Testear que en ningún momento un contrato pagado caiga a la categoría vencido por la fecha limite
+        this.managerContracts.changePaid(id);
     }
 
     public boolean existsLoanRequest(String id){
@@ -103,4 +100,12 @@ public class Shop {
     public List<String> getPaidContracts(){
         return this.managerContracts.getPaidContracts().stream().map(Contract::toString).toList();
     }
+
+    public List<Contract> getAllExpiredContracts(){
+        List<Contract> currentExpiredContract = this.managerContracts.CurrentsContractsExpired();
+        List<Item> items = this.managerContracts.getItemsOfListContracts(currentExpiredContract);
+        this.moveItemsToStorage(items);
+        this.managerContracts.changeCurrentsContractsExpiredToExpired();
+        return this.managerContracts.getExpiredContracts();
+     }
 }

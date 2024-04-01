@@ -80,7 +80,6 @@ public class Controller {
             action = Console.optionsToManageLoanRequest();
             switch (action){
                 case "1" -> {
-                    shop.acceptLoanRequest(id);
                     Console.newContract();
                 }
                 case "2" -> {
@@ -137,7 +136,15 @@ public class Controller {
         Console.entryPayContract();
         List<String> currentContractsInfo = shop.getCurrentContractsInfo();
         Console.showListInfo(currentContractsInfo);
-        String id = getIdOfContract();
+        String id;
+        do {
+            id = getIdOfContract();
+            if (shop.existsContract(id)){
+                break;
+            }
+            Console.invalidOption();
+        } while (true);
+
         shop.setContractAsPaid(Integer.parseInt(id));
     }
 
