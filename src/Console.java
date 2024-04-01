@@ -10,19 +10,20 @@ public class Console {
     public static Scanner scan = new Scanner(System.in);
 
     public static void showOptions () {
-        System.out.println("========== ¡Bienvenido a Mi Casa de Empeño! ==========");
+        System.out.println("============= ¡Bienvenido a Mi Casa de Empeño! =============");
         System.out.println("Has ingresado como empleado de la tienda.");
         System.out.println("\n¿Qué deseas hacer?");
-        System.out.println("------------------------------------------------------");
+        System.out.println("------------------------------------------------------------");
         System.out.println("1. Gestionar solicitudes de prestamo."); // Desde aquí se aceptan, rechanzan o contraofertan
         System.out.println("2. Consultar historial de solicitudes de prestamo atendidas."); // muestra las aceptadas, rechazadas, contraofertadas
         System.out.println("3. Consultar estado de contrado de las prendas empeñadas."); // Todos los contratos
         System.out.println("4. Consultar contratos vencidos.");
         System.out.println("5. Consultar contratos a vencer en una semana.");
-        System.out.println("6. Registrar pago de contrato.");
-        System.out.println("7. Consultar prendas adquiridas por la tienda.");
-        System.out.println("8. Salir.");
-        System.out.println("-----------------------------------------------------");
+        System.out.println("6. Consultar contratos pagos."); // NEW
+        System.out.println("7. Registrar pago de contrato.");
+        System.out.println("8. Consultar prendas adquiridas por la tienda.");
+        System.out.println("9. Salir.");
+        System.out.println("-----------------------------------------------------------");
     }
     public static String getOption(){
         System.out.println("Digita el número de la opción: ");
@@ -31,11 +32,6 @@ public class Console {
 
     public static void invalidOption(){
         System.out.println("Por favor, elija una opción válida.");
-    }
-
-    public static void farewell(){
-        System.out.println("¡Vuelva pronto!");
-        System.out.println("-----------------------------------------------------");
     }
 
     public static void pause(){
@@ -99,11 +95,48 @@ public class Console {
         return scan.nextLine();
     }
 
+    // Option 2
+    public static void showLoanRequestHistory(){
+        System.out.println("\n--- Consultar historial de solicitudes de prestamo atendidas ---\n");
+    }
+
+    // Option 3
+    public static void showAllContractsState(){
+        System.out.println("\n---- Consultar estado de contrado de las prendas empeñadas ----\n");
+    }
+
+    // Option 4
+    public static void showExpiredContracts(){
+        System.out.println("\n--------------- Consultar contratos vencidos ---------------\n");
+    }
+
+    // Option 5
+    public static void showContractsAboutToExpire(){
+        System.out.println("\n-------- Consultar contratos a vencer en una semana --------\n");
+    }
+
     // Option 6
+    public static void showPaidContracts(){
+        System.out.println("\n----------------- Consultar contratos pagos -----------------\n");
+    }
+
+    // Option 7
     public static void entryPayContract(){
         System.out.println("\n------- Registrar pago de contrato -------");
         System.out.println("Estos son todos los contratos de prenda vigentes: ");
     }
+
+    // Option 8
+    public static void showItemsOwned(){
+        System.out.println("\n--------- Consultar prendas adquiridas por la tienda ---------\n");
+    }
+
+    // Option 9
+    public static void farewell(){
+        System.out.println("¡Vuelva pronto!");
+        System.out.println("-----------------------------------------------------");
+    }
+
 }
 
 

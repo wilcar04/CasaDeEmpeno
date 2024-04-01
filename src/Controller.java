@@ -35,12 +35,15 @@ public class Controller {
                     readContractsAboutToExpire();
                 }
                 case "6" -> {
-                    payContract();
+                    readPaidContracts();
                 }
                 case "7" -> {
-                    readItemsOwnedByShop();
+                    payContract();
                 }
                 case "8" -> {
+                    readItemsOwnedByShop();
+                }
+                case "9" -> {
                     exit();
                 }
                 default -> {Console.invalidOption(); continue;}
@@ -95,25 +98,40 @@ public class Controller {
 
     // Option 2
     public static void readLoanRequestManagementHistory(){
-
+        List<String> infoList = shop.getStateOfLoanRequestInteractions();
+        Console.showLoanRequestHistory();
+        Console.showListInfo(infoList);
     }
 
     // Option 3
     public static void readCurrentContractState(){
-
+        List<String> infoList = shop.getAllContractsWithState();
+        Console.showAllContractsState();
+        Console.showListInfo(infoList);
     }
 
     // Option 4
     public static void readExpiredContracts(){
-
+        List<String> infoList = shop.getContractsWithDeadlineDate();
+        Console.showExpiredContracts();
+        Console.showListInfo(infoList);
     }
 
     // Option 5
     public static void readContractsAboutToExpire(){
-
+        List<String> infoList = shop.getItemsWithDeadlineDateInOneWeek();
+        Console.showContractsAboutToExpire();
+        Console.showListInfo(infoList);
     }
 
     // Option 6
+    public static void readPaidContracts(){
+        List<String> infoList = shop.getPaidContracts();
+        Console.showPaidContracts();
+        Console.showListInfo(infoList);
+    }
+
+    // Option 7
     public static void payContract(){
         Console.entryPayContract();
         List<String> currentContractsInfo = shop.getCurrentContractsInfo();
@@ -122,7 +140,7 @@ public class Controller {
         shop.setContractAsPaid(Integer.parseInt(id));
     }
 
-    // Option 6
+    // Option 7
     public static String getIdOfContract(){
         String id;
         do {
@@ -134,12 +152,14 @@ public class Controller {
         } while(true);
     }
 
-    // Option 7
+    // Option 8
     public static void readItemsOwnedByShop(){
-
+        List<String> infoList = shop.getItemsOwned();
+        Console.showItemsOwned();
+        Console.showListInfo(infoList);
     }
 
-    // Option 8
+    // Option 9
     public static void exit() throws Exception {
         Console.farewell();
         throw new Exception();
