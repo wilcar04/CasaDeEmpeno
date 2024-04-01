@@ -12,6 +12,7 @@ public class Shop {
 
     private ManagerLoanRequest loansRequest;
     private ManagerContract managerContracts;
+    private DataContainer data;
 
     Shop (Integer NIT, String name){
         this.NIT = NIT;
@@ -19,9 +20,14 @@ public class Shop {
         this.storage= new Storage("Store");
         this.managerContracts = new ManagerContract();
         this.loansRequest = new ManagerLoanRequest();
+        this.data = new DataContainer();
     }
     public void loadInitialData(){
-        //VICTOOOOOOOR
+        this.storage = this.data.storageData();
+        this.managerContracts = this.data.contractsData();
+        this.loansRequest = this.data.loansRequestData();
+
+
         // TO DO: super importante!!!! crear diferentes contratos, items, clientes y loanRequest con diferentes atributos, fechas y estados
         // con el fin de poder testear todas las HU y opciones de consola y para que el profe pueda ver funcionando todas las operaciones
     }

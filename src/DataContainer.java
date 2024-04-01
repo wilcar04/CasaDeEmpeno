@@ -56,12 +56,12 @@ public class DataContainer {
         Client client_5 = new Client("Sofia", "sofia97@gmail.com", "30230879456");
         Client client_6 = new Client("Albert", "albert_wolf03@gmail.com", "31130859504");
 
-        this.managerContracts.createContract(4.3f, new Date(2023, 12, 22), new Date(2023, 2, 31), 1000f, this.list_items.get(0), client_1);
-        this.managerContracts.createContract(4f, new Date(2024, 1, 1), new Date(2024, 3, 15), 1500f, this.list_items.get(1), client_2);
-        this.managerContracts.createContract(3.2f, new Date(2024, 1, 1), new Date(2024, 3, 30), 2000f, this.list_items.get(2), client_3);
-        this.managerContracts.createContract(5.5f, new Date(2024, 2,1), new Date(2024, 4, 15), 3000f, this.list_items.get(3), client_4);
-        this.managerContracts.createContract(2.3f, new Date(2024, 4, 6), new Date(2024, 5, 7), 9000f, this.list_items.get(4), client_5);
-        this.managerContracts.createContract(3.5f, new Date(2024, 4, 8), new Date(2024, 6, 10), 2500f, this.list_items.get(5), client_6);
+        this.managerContracts.createContract(4.3f,  new Date(2023, 2, 31), 1000f, this.list_items.get(0), client_1);
+        this.managerContracts.createContract(4f,  new Date(2024, 3, 15), 1500f, this.list_items.get(1), client_2);
+        this.managerContracts.createContract(3.2f,  new Date(2024, 3, 30), 2000f, this.list_items.get(2), client_3);
+        this.managerContracts.createContract(5.5f, new Date(2024, 4, 15), 3000f, this.list_items.get(3), client_4);
+        this.managerContracts.createContract(2.3f,  new Date(2024, 5, 7), 9000f, this.list_items.get(4), client_5);
+        this.managerContracts.createContract(3.5f,  new Date(2024, 6, 10), 2500f, this.list_items.get(5), client_6);
 
         return this.managerContracts;
 
