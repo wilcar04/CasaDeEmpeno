@@ -101,7 +101,7 @@ public class Controller {
         Console.newContract();
         int quantityOfMonthsToAdd = Integer.parseInt(Console.getQuantityOfMonths());
         float interest = Float.parseFloat(Console.getInterest());
-        shop.acceptLoanRequest(id);
+        shop.acceptLoanRequest(id, quantityOfMonthsToAdd, interest);
     }
 
     // Option 2

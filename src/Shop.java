@@ -26,10 +26,6 @@ public class Shop {
         this.storage = this.data.storageData();
         this.managerContracts = this.data.contractsData();
         this.loansRequest = this.data.loansRequestData();
-
-
-        // TO DO: super importante!!!! crear diferentes contratos, items, clientes y loanRequest con diferentes atributos, fechas y estados
-        // con el fin de poder testear todas las HU y opciones de consola y para que el profe pueda ver funcionando todas las operaciones
     }
     public List<String> getNewLoanRequest() {
         return this.loansRequest.getNewState().stream().map(LoanRequest::toString).toList();
