@@ -1,6 +1,7 @@
 import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.ForkJoinPool;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
@@ -96,8 +97,34 @@ public class Console {
     }
 
     // Option 1
-    public static String newContract(){
-        System.out.println("Se ha creado un nuevo contrato con el item de la solicitud");
+    public static void newContract(){
+        System.out.println("\n----------------- Crear nuevo contrato -----------------");
+        System.out.println("Para crear un nuevo contrato de prenda para la solicitud recién aceptada," +
+                "\nporfavor ingrese los siguientes datos");
+    }
+
+    // Option 1
+    public static String getQuantityOfMonths(){
+        System.out.println("¿Cuántos meses de plazo se tendrá para la cancelación de la deuda?");
+        do {
+            String months = getNumber();
+            if (Integer.parseInt(months) >= 1){
+                return months;
+            }
+            Console.invalidOption();
+        } while(true);
+    }
+
+    // Option 1
+    public static String getInterest(){
+        System.out.println("¿Cuál porcentaje de interés se aplicar sobre el valor acordado?");
+        do {
+            String interest = getNumber();
+            if (Float.parseFloat(interest) >= 0){
+                return interest;
+            }
+            Console.invalidOption();
+        } while(true);
     }
 
     // Option 2

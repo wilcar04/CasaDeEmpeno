@@ -80,7 +80,7 @@ public class Controller {
             action = Console.optionsToManageLoanRequest();
             switch (action){
                 case "1" -> {
-                    Console.newContract();
+                    createNewContract(id);
                 }
                 case "2" -> {
                     shop.rejectLoanRequest(id);
@@ -94,6 +94,14 @@ public class Controller {
             Console.succes();
             break;
         } while(true);
+    }
+
+    // Option 1
+    public static void createNewContract(int id){
+        Console.newContract();
+        int quantityOfMonthsToAdd = Integer.parseInt(Console.getQuantityOfMonths());
+        float interest = Float.parseFloat(Console.getInterest());
+        shop.acceptLoanRequest(id);
     }
 
     // Option 2
