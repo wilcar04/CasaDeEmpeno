@@ -20,12 +20,12 @@ public class Shop {
         this.storage= new Storage("Store");
         this.managerContracts = new ManagerContract();
         this.loansRequest = new ManagerLoanRequest();
-        this.data = new DataContainer();
+
     }
     public void loadInitialData(){
-        this.storage = this.data.storageData();
-        this.managerContracts = this.data.contractsData();
-        this.loansRequest = this.data.loansRequestData();
+        this.storage = DataContainer.storageData();
+        this.managerContracts = DataContainer.contractsData();
+        this.loansRequest = DataContainer.loansRequestData();
     }
     public List<String> getNewLoanRequest() {
         return this.loansRequest.getNewState().stream().map(LoanRequest::toString).toList();
