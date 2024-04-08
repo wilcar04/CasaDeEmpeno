@@ -42,7 +42,8 @@ public class ManagerLoanRequest {
     }
 
     public void createNewLoanRequests(Date date, Client list_clients, Item list_items, int price){
-        this.LoanRequests.add(new LoanRequest(date, list_clients, list_items, price));
+        LoanRequest loanRequest = new LoanRequest(date, list_clients, list_items, price);
+        this.LoanRequests.add(loanRequest);
     }
 
     public void changeToCounterofferState(int price, int idloanRequest) {
