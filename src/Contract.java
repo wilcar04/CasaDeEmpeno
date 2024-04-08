@@ -37,9 +37,10 @@ public class Contract {
     }
     public boolean checkDeadLineInOneWeek(){
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 7); // Agregar 7 días a la fecha actual
+        calendar.add(Calendar.DAY_OF_MONTH, 8); // Agregar 8 días a la fecha actual
         Date oneWeekFromNow = calendar.getTime();
-        return this.deadline.before(oneWeekFromNow);
+        System.out.println(oneWeekFromNow);
+        return (this.deadline.before(oneWeekFromNow) && this.deadline.after(new Date())) ;
     }
 
     public void setState(String state) {

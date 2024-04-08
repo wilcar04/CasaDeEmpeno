@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-
 public class Shop {
     public Integer NIT;
     public String name;
@@ -60,9 +59,7 @@ public class Shop {
     public List<String> getItemsWithDeadlineDateInOneWeek(){
         return this.managerContracts.getItemsWithDeadlineDateInOneWeek().stream().map(Contract::toString).toList();
     }
-    public  List<Item> getItemsOfListContracts(List<Contract> contracts){
-        return this.managerContracts.getItemsOfListContracts(contracts);
-    }
+
 
     public void moveItemsToStorage(List<Item> items){
         this.storage.addListItems(items);
@@ -111,5 +108,5 @@ public class Shop {
         this.moveItemsToStorage(items);
         this.managerContracts.changeCurrentsContractsExpiredToExpired();
         return this.managerContracts.getExpiredContracts().stream().map(Contract::toString).toList();
-     }
+}
 }

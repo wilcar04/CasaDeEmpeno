@@ -69,8 +69,8 @@ public class ManagerContract {
 
     public List<Contract> getItemsWithDeadlineDateInOneWeek() {
 
-        return this.getContracts().stream()
-                .filter(Contract::checkDeadLineInOneWeek)
+        return this.getCurrentContracts().stream()
+                .filter(contract-> contract.checkDeadLineInOneWeek())
                 .toList();
     }
 
@@ -80,11 +80,6 @@ public class ManagerContract {
                 .toList();
     }
 
-    public void deleteExpiredContracts() {
-        this.contracts = this.contracts.stream()
-                .filter(contract -> !Objects.equals(contract.getState(), "expired"))
-                .toList();
-    }
 
 
 
@@ -112,11 +107,10 @@ public class ManagerContract {
 
     public void changeCurrentsContractsExpiredToExpired() {
         this.contracts = this.contracts.stream()
-                .map(contract -> {
+                .peek(contract -> {
                     if (contract.isExpired() && Objects.equals(contract.getState(), "current")) {
                         contract.setState("expired");
                     }
-                    return contract;
                 }).toList();
     }
 
