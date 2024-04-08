@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class Controller {
-    private static Shop shop = new Shop(0, "Tienda de Empeño");
+    private static final Shop shop = new Shop(0, "Tienda de Empeño");
     public static void mainLoop(){
         shop.loadInitialData();
         while(true){

@@ -45,8 +45,9 @@ public class Console {
     }
 
     public static void showListInfo(List<String> listInfo){
+        System.out.println("----");
         for(String info : listInfo) {
-            System.out.println(info);
+            System.out.println(info + "\n----");
         }
     }
 

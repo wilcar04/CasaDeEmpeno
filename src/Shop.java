@@ -12,7 +12,7 @@ public class Shop {
 
     private ManagerLoanRequest loansRequest;
     private ManagerContract managerContracts;
-    private DataContainer data;
+    private final DataContainer data;
 
     Shop (Integer NIT, String name){
         this.NIT = NIT;
