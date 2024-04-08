@@ -120,7 +120,7 @@ public class Controller {
 
     // Option 4
     public static void readExpiredContracts(){
-        List<String> infoList = shop.getContractsWithDeadlineDate();
+        List<String> infoList = shop.getAllExpiredContracts();
         Console.showExpiredContracts();
         Console.showListInfo(infoList);
     }
