@@ -55,13 +55,19 @@ public class DataContainer {
         Client client_4 = new Client("Juliana", "juli_ana33@gmail.com", "3165425794");
         Client client_5 = new Client("Sofia", "sofia97@gmail.com", "30230879456");
         Client client_6 = new Client("Albert", "albert_wolf03@gmail.com", "31130859504");
+        this.list_clients.add(client_1);
+        this.list_clients.add(client_2);
+        this.list_clients.add(client_3);
+        this.list_clients.add(client_4);
+        this.list_clients.add(client_5);
+        this.list_clients.add(client_6);
 
-        this.managerContracts.createContract(4.3f,  new Date(2023, 2, 31), 1000f, this.list_items.get(0), client_1);
-        this.managerContracts.createContract(4f,  new Date(2024, 3, 15), 1500f, this.list_items.get(1), client_2);
-        this.managerContracts.createContract(3.2f,  new Date(2024, 3, 30), 2000f, this.list_items.get(2), client_3);
-        this.managerContracts.createContract(5.5f, new Date(2024, 4, 15), 3000f, this.list_items.get(3), client_4);
-        this.managerContracts.createContract(2.3f,  new Date(2024, 5, 7), 9000f, this.list_items.get(4), client_5);
-        this.managerContracts.createContract(3.5f,  new Date(2024, 6, 10), 2500f, this.list_items.get(5), client_6);
+        this.managerContracts.createContract(4.3f,  new Date(2023, 2, 31), 1000f, this.list_items.get(0), this.list_clients.get(0));
+        this.managerContracts.createContract(4f,  new Date(2024, 3, 15), 1500f, this.list_items.get(1), this.list_clients.get(1));
+        this.managerContracts.createContract(3.2f,  new Date(2024, 3, 30), 2000f, this.list_items.get(2), this.list_clients.get(2));
+        this.managerContracts.createContract(5.5f, new Date(2024, 4, 15), 3000f, this.list_items.get(3), this.list_clients.get(3));
+        this.managerContracts.createContract(2.3f,  new Date(2024, 5, 7), 9000f, this.list_items.get(4), this.list_clients.get(4));
+        this.managerContracts.createContract(3.5f,  new Date(2024, 6, 10), 2500f, this.list_items.get(5), this.list_clients.get(5));
 
         return this.managerContracts;
 
