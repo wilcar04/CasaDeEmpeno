@@ -72,8 +72,8 @@ public class Shop {
         this.managerContracts.changePaid(id);
     }
 
-    public boolean existsLoanRequest(String id){
-        return this.loansRequest.existsLoanRequest(Integer.parseInt(id));
+    public boolean existsNewLoanRequest(String id){
+        return this.loansRequest.existsNewLoanRequest(Integer.parseInt(id));
     }
 
     public boolean existsContract(String id){

@@ -66,7 +66,7 @@ public class Controller {
         String id;
         do {
             id = Console.getId();
-            if (shop.existsLoanRequest(id)){
+            if (shop.existsNewLoanRequest(id)){
                 return id;
             }
             Console.invalidOption();
@@ -154,6 +154,7 @@ public class Controller {
         } while (true);
 
         shop.setContractAsPaid(Integer.parseInt(id));
+        Console.succes();
     }
 
     // Option 7

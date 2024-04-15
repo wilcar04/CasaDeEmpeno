@@ -1,3 +1,5 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -26,11 +28,15 @@ public class Contract {
 
     @Override
     public String toString(){
-        return "Id: " + this.id + " | Item: " + this.item.name + "\nFecha límite de pago: " + this.deadline
+        return "Id: " + this.id + " | Item: " + this.item.name + "\nFecha límite de pago: " + this.getFormat(this.deadline)
                 + "\nValor: " + this.price + " con " + this.interest + "% de intereses\nDeudor: " + this.client.name
-                + "\nFecha del prestamo: " + this.initial_date;
+                + "\nFecha del prestamo: " + this.getFormat(this.initial_date);
     }
 
+    public String getFormat(Date date){
+        DateFormat dateFormat = new SimpleDateFormat("EEEE dd-MM-yyyy");
+        return dateFormat.format(date);
+    }
 
     public boolean isExpired(){
         return this.deadline.before(new Date());

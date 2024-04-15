@@ -89,8 +89,9 @@ public class ManagerLoanRequest {
                 .findFirst();
     }
 
-    public boolean existsLoanRequest(int idLoanRequest){
-        return this.LoanRequests.stream()
-                .anyMatch(loanRequest -> loanRequest.id == idLoanRequest);
+    public boolean existsNewLoanRequest(int idLoanRequest){
+        Optional<LoanRequest> loanRequestSelected = this.LoanRequests.stream()
+                .filter(loanRequest -> loanRequest.id == idLoanRequest).findFirst();
+        return loanRequestSelected.map(loanRequest -> loanRequest.getState().equals("new")).orElse(false);
     }
 }

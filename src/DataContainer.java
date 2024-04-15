@@ -49,7 +49,6 @@ public class DataContainer {
         return this.storage;
     }
     public ManagerContract contractsData() {
-        this.storageData();
         this.list_clients = new ArrayList<>();
         Client client_1 = new Client("Juan", "juan@gmail.com", "3013375465");
         Client client_2 = new Client("Antonio", "antonio86@gmail.com", "3014950673");
@@ -65,7 +64,7 @@ public class DataContainer {
         this.list_clients.add(client_6);
         this.managerContracts.createContract(0.05f, new Date(2024-1900,3,3), 3000F, this.list_items.get(6), this.list_clients.get(0));
         this.managerContracts.createContract(0.05f, new Date(2024-1900,3,10), 3000F, this.list_items.get(6), this.list_clients.get(0));
-        this.managerContracts.createContract(0.05f, new Date(2024-1900,4,10), 3000F, this.list_items.get(6), this.list_clients.get(0));
+        this.managerContracts.createContract(0.05f, new Date(2024-1900,5,18), 3000F, this.list_items.get(6), this.list_clients.get(0));
         return this.managerContracts;
 
     }
