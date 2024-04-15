@@ -1,8 +1,10 @@
 import com.sun.source.tree.ReturnTree;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Calendar;
 
 public class DataContainer {
     public Storage storage;
@@ -47,7 +49,6 @@ public class DataContainer {
         return this.storage;
     }
     public ManagerContract contractsData() {
-        this.storageData();
         this.list_clients = new ArrayList<>();
         Client client_1 = new Client("Juan", "juan@gmail.com", "3013375465");
         Client client_2 = new Client("Antonio", "antonio86@gmail.com", "3014950673");
@@ -61,28 +62,22 @@ public class DataContainer {
         this.list_clients.add(client_4);
         this.list_clients.add(client_5);
         this.list_clients.add(client_6);
-
-        this.managerContracts.createContract(4.3f,  new Date(2023, 2, 31), 1000f, this.list_items.get(0), this.list_clients.get(0));
-        this.managerContracts.createContract(4f,  new Date(2024, 3, 15), 1500f, this.list_items.get(1), this.list_clients.get(1));
-        this.managerContracts.createContract(3.2f,  new Date(2024, 3, 30), 2000f, this.list_items.get(2), this.list_clients.get(2));
-        this.managerContracts.createContract(5.5f, new Date(2024, 4, 15), 3000f, this.list_items.get(3), this.list_clients.get(3));
-        this.managerContracts.createContract(2.3f,  new Date(2024, 5, 7), 9000f, this.list_items.get(4), this.list_clients.get(4));
-        this.managerContracts.createContract(3.5f,  new Date(2024, 6, 10), 2500f, this.list_items.get(5), this.list_clients.get(5));
-
+        this.managerContracts.createContract(0.05f, new Date(2024-1900,3,3), 3000F, this.list_items.get(6), this.list_clients.get(0));
+        this.managerContracts.createContract(0.05f, new Date(2024-1900,3,10), 3000F, this.list_items.get(6), this.list_clients.get(0));
+        this.managerContracts.createContract(0.05f, new Date(2024-1900,5,18), 3000F, this.list_items.get(6), this.list_clients.get(0));
         return this.managerContracts;
 
     }
     public ManagerLoanRequest loansRequestData() {
-        this.contractsData();
-        this.loansRequest.createNewLoanRequests(new Date(2024,1,11), this.list_clients.get(0), this.list_items.get(6), 3000);
-        this.loansRequest.createNewLoanRequests(new Date(2024,2,29), this.list_clients.get(1), this.list_items.get(7), 4000);
-        this.loansRequest.createNewLoanRequests(new Date(2024,3,21), this.list_clients.get(2), this.list_items.get(8), 5000);
-        this.loansRequest.createNewLoanRequests(new Date(2024,3,16), this.list_clients.get(2), this.list_items.get(9), 3500);
-        this.loansRequest.createNewLoanRequests(new Date(2024,2,17), this.list_clients.get(3), this.list_items.get(10), 4500);
-        this.loansRequest.createNewLoanRequests(new Date(2024,4,1), this.list_clients.get(4), this.list_items.get(11), 6000);
+        this.loansRequest.createNewLoanRequests(new Date(2024-1900,1,11), this.list_clients.get(0), this.list_items.get(6), 3000);
+        this.loansRequest.createNewLoanRequests(new Date(2024-1900,2,29), this.list_clients.get(1), this.list_items.get(7), 4000);
+        this.loansRequest.createNewLoanRequests(new Date(2024-1900,3,21), this.list_clients.get(2), this.list_items.get(8), 5000);
+        this.loansRequest.createNewLoanRequests(new Date(2024-1900,3,16), this.list_clients.get(2), this.list_items.get(9), 3500);
+        this.loansRequest.createNewLoanRequests(new Date(2024-1900,2,17), this.list_clients.get(3), this.list_items.get(10), 4500);
+        this.loansRequest.createNewLoanRequests(new Date(2024-1900,Calendar.APRIL,20), this.list_clients.get(4), this.list_items.get(11), 6000);
         this.loansRequest.changeToCounterofferState(3500, 3);
         this.loansRequest.changeToRejectedState(6);
-        this.loansRequest.changeToAcceptedState(2);
+        this.loansRequest.changeToAcceptedState(4);
 
         return this.loansRequest;
     }

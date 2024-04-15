@@ -11,7 +11,7 @@ public class Console {
     public static Scanner scan = new Scanner(System.in);
 
     public static void showOptions () {
-        System.out.println("============= ¡Bienvenido a Mi Casa de Empeño! =============");
+        System.out.println("\n\n============= ¡Bienvenido a Mi Casa de Empeño! =============");
         System.out.println("Has ingresado como empleado de la tienda.");
         System.out.println("\n¿Qué deseas hacer?");
         System.out.println("------------------------------------------------------------");
@@ -45,8 +45,9 @@ public class Console {
     }
 
     public static void showListInfo(List<String> listInfo){
+        System.out.println("----");
         for(String info : listInfo) {
-            System.out.println(info);
+            System.out.println(info + "\n----");
         }
     }
 

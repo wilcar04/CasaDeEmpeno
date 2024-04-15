@@ -1,3 +1,5 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -26,20 +28,25 @@ public class Contract {
 
     @Override
     public String toString(){
-        return "Id: " + this.id + " | Item: " + this.item.name + "\nFecha límite de pago: " + this.deadline
+        return "Id: " + this.id + " | Item: " + this.item.name + "\nFecha límite de pago: " + this.getFormat(this.deadline)
                 + "\nValor: " + this.price + " con " + this.interest + "% de intereses\nDeudor: " + this.client.name
-                + "\nFecha del prestamo: " + this.initial_date;
+                + "\nFecha del prestamo: " + this.getFormat(this.initial_date);
     }
 
+    public String getFormat(Date date){
+        DateFormat dateFormat = new SimpleDateFormat("EEEE dd-MM-yyyy");
+        return dateFormat.format(date);
+    }
 
     public boolean isExpired(){
         return this.deadline.before(new Date());
     }
     public boolean checkDeadLineInOneWeek(){
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 7); // Agregar 7 días a la fecha actual
+        calendar.add(Calendar.DAY_OF_MONTH, 8); // Agregar 8 días a la fecha actual
         Date oneWeekFromNow = calendar.getTime();
-        return this.deadline.before(oneWeekFromNow);
+        System.out.println(oneWeekFromNow);
+        return (this.deadline.before(oneWeekFromNow) && this.deadline.after(new Date())) ;
     }
 
     public void setState(String state) {

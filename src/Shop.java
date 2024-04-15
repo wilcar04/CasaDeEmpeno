@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-
 public class Shop {
     public Integer NIT;
     public String name;
@@ -12,7 +11,7 @@ public class Shop {
 
     private ManagerLoanRequest loansRequest;
     private ManagerContract managerContracts;
-    private DataContainer data;
+    private final DataContainer data;
 
     Shop (Integer NIT, String name){
         this.NIT = NIT;
@@ -31,9 +30,7 @@ public class Shop {
     public List<String> getNewLoanRequest() {
         return this.loansRequest.getNewState().stream().map(LoanRequest::toString).toList();
     }
-    public List<String> getCurrentContractsInfo(){
-        return this.managerContracts.getCurrentContracts().stream().map(Contract::toString).toList();
-    }
+
     public void rejectLoanRequest(int idLoanRequest){
         this.loansRequest.changeToRejectedState(idLoanRequest);
     }
@@ -50,7 +47,7 @@ public class Shop {
         acceptedRequest.ifPresent(loanRequest -> this.managerContracts.createContract(interest, oneDateFromNow, loanRequest.getPrice(), loanRequest.item, loanRequest.client));
     }
 
-    public List<String> getStateOfLoanRequestInteractions(){
+    public List<String> getStateOfLoanRequestInteractions() {
         Stream<String> acceptedLoanRequest = this.loansRequest.getAcceptedState().stream()
                 .map(loanRequest -> "=== Aceptada ===\n" + loanRequest.toString());
         Stream<String> rejectedLoanRequest = this.loansRequest.getRejectedState().stream()
@@ -60,16 +57,10 @@ public class Shop {
         return Stream.concat(acceptedLoanRequest, Stream.concat(rejectedLoanRequest, counterofferLoanRequest)).toList();
     }
 
-    public List<String> getContractsWithDeadlineDate() {
-        return this.managerContracts.getExpiredContracts().stream().map(Contract::toString).toList();
-    }
-
     public List<String> getItemsWithDeadlineDateInOneWeek(){
         return this.managerContracts.getItemsWithDeadlineDateInOneWeek().stream().map(Contract::toString).toList();
     }
-    public  List<Item> getItemsOfListContracts(List<Contract> contracts){
-        return this.managerContracts.getItemsOfListContracts(contracts);
-    }
+
 
     public void moveItemsToStorage(List<Item> items){
         this.storage.addListItems(items);
@@ -82,8 +73,8 @@ public class Shop {
         this.managerContracts.changePaid(id);
     }
 
-    public boolean existsLoanRequest(String id){
-        return this.loansRequest.existsLoanRequest(Integer.parseInt(id));
+    public boolean existsNewLoanRequest(String id){
+        return this.loansRequest.existsNewLoanRequest(Integer.parseInt(id));
     }
 
     public boolean existsContract(String id){
@@ -91,24 +82,32 @@ public class Shop {
     }
 
     public List<String> getAllContractsWithState(){
-        Stream<String> acceptedLoanRequest = this.managerContracts.getCurrentContracts().stream()
-                .map(loanRequest -> "=== Vigente ===\n" + loanRequest.toString());
-        Stream<String> rejectedLoanRequest = this.managerContracts.getPaidContracts().stream()
-                .map(loanRequest -> "=== Pagado ===\n" + loanRequest.toString());
-        Stream<String> counterofferLoanRequest = this.managerContracts.getExpiredContracts().stream()
-                .map(loanRequest -> "=== Vencido ===\n" + loanRequest.toString());
-        return Stream.concat(acceptedLoanRequest, Stream.concat(rejectedLoanRequest, counterofferLoanRequest)).toList();
+        // TO DO: Verificar que no se estén devolviendo vigentes vencidos ***************************************
+        Stream<String> paidContracts = this.getPaidContracts().stream().map(
+                contractInfo -> "=== Pagado ===\n" + contractInfo
+        );
+        Stream<String> expiredContacts = this.getAllExpiredContracts().stream().map(
+                contractInfo -> "=== Expirado ===\n" + contractInfo
+        );
+        Stream<String> currentContracts = this.getCurrentContractsInfo().stream().map(
+                contractInfo -> "=== Vigente ===\n" + contractInfo
+        );
+        return Stream.concat(currentContracts, Stream.concat(paidContracts, expiredContacts)).toList();
     }
 
     public List<String> getPaidContracts(){
         return this.managerContracts.getPaidContracts().stream().map(Contract::toString).toList();
     }
 
-    public List<Contract> getAllExpiredContracts(){
+    public List<String> getCurrentContractsInfo(){
+        return this.managerContracts.getCurrentContracts().stream().map(Contract::toString).toList();
+    }
+
+    public List<String> getAllExpiredContracts(){
         List<Contract> currentExpiredContract = this.managerContracts.CurrentsContractsExpired();
         List<Item> items = this.managerContracts.getItemsOfListContracts(currentExpiredContract);
         this.moveItemsToStorage(items);
         this.managerContracts.changeCurrentsContractsExpiredToExpired();
-        return this.managerContracts.getExpiredContracts();
-     }
+        return this.managerContracts.getExpiredContracts().stream().map(Contract::toString).toList();
+}
 }

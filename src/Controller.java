@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class Controller {
-    private static Shop shop;
+    private static final Shop shop = new Shop(0, "Tienda de Empeño");
     public static void mainLoop(){
         shop.loadInitialData();
         while(true){
@@ -66,7 +66,7 @@ public class Controller {
         String id;
         do {
             id = Console.getId();
-            if (shop.existsLoanRequest(id)){
+            if (shop.existsNewLoanRequest(id)){
                 return id;
             }
             Console.invalidOption();
@@ -120,7 +120,7 @@ public class Controller {
 
     // Option 4
     public static void readExpiredContracts(){
-        List<String> infoList = shop.getContractsWithDeadlineDate();
+        List<String> infoList = shop.getAllExpiredContracts();
         Console.showExpiredContracts();
         Console.showListInfo(infoList);
     }
@@ -154,6 +154,7 @@ public class Controller {
         } while (true);
 
         shop.setContractAsPaid(Integer.parseInt(id));
+        Console.succes();
     }
 
     // Option 7

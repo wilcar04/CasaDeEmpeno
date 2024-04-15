@@ -1,3 +1,5 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class LoanRequest {
@@ -25,10 +27,16 @@ public class LoanRequest {
     }
     @Override
     public String toString(){
-        return "Id: " + Integer.toString(this.id) + " | Fecha: " + this.date + "\nItem: " + this.item.name +
+        return "Id: " + this.id + " | Fecha: " + this.getFormat(this.date) + "\nItem: " + this.item.name +
                 "\nDescripción: " + this.item.description + "\nSolicitado por: " + this.client.name + " | Email: "
                 + this.client.email + "\nValor propuesto: " + this.price;
     }
+
+    public String getFormat(Date date){
+        DateFormat dateFormat = new SimpleDateFormat("EEEE dd-MM-yyyy");
+        return dateFormat.format(date);
+    }
+
     public void setState(String state) {
         switch (state){
             case "new":
